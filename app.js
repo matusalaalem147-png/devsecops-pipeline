@@ -39,6 +39,11 @@ app.post("/tasks", (req, res) => {
   return res.status(201).json(task);
 });
 
+// Task 4B: deliberately insecure pattern (reflected XSS) for CodeQL to detect.
+app.get("/greet", (req, res) => {
+  res.send("<h1>Hello " + req.query.name + "</h1>");
+});
+
 app.use((req, res) => {
   res.status(404).json({ error: "Not found" });
 });
