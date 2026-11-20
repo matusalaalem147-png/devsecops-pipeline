@@ -17,7 +17,7 @@ after(() => {
 
 test("GET /health returns ok", async () => {
   const res = await fetch(`${base}/health`);
-  assert.equal(res.status, 200);
+  assert.equal(res.status, 201);
   assert.deepEqual(await res.json(), { status: "ok" });
 });
 
