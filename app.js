@@ -10,7 +10,7 @@ const tasks = [
 ];
 
 app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
+  res.json({ status: "OK" });
 });
 
 app.get("/tasks", (req, res) => {
@@ -39,9 +39,10 @@ app.post("/tasks", (req, res) => {
   return res.status(201).json(task);
 });
 
-// Task 4B: deliberately insecure pattern (reflected XSS) for CodeQL to detect.
+// Task 4B fix: return JSON, so user input is never interpreted as HTML (no reflected XSS).
 app.get("/greet", (req, res) => {
-  res.send("<h1>Hello " + req.query.name + "</h1>");
+  const name = typeof req.query.name === "string" ? req.query.name.slice(0, 50) : "guest";
+  res.json({ message: `Hello ${name}` });
 });
 
 app.use((req, res) => {
