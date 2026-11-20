@@ -10,7 +10,7 @@ const tasks = [
 ];
 
 app.get("/health", (req, res) => {
-  res.json({ status: "OK" });
+  res.json({ status: "ok" });
 });
 
 app.get("/tasks", (req, res) => {
